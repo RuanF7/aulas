@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
    
-    const handleEntrar = () => {
-
-    
-    }
+    const handleEntrar = useCallback (() => {        
+        console.log(email)
+        console.log(password)
+    }, [email, password]);
 
     return (
         <div>
