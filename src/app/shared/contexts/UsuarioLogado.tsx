@@ -14,7 +14,7 @@ export const UsuarioLogadoProvider: React.FC <IUsuarioLogadoProviderProps> = ({ 
   /*const [nome, setNome] = useState ('');*/
 
   return (
-    <UsuarioLogadoContext.Provider value={{nomeDoUsuario:'Lucas'}}>
+    <UsuarioLogadoContext.Provider value={{nomeDoUsuario:'Ruan'}}>
       {children}
     </UsuarioLogadoContext.Provider>
   );

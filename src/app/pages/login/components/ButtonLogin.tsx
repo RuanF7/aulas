@@ -1,3 +1,4 @@
+import { useUsuarioLogado } from "../../../shared/hooks";
 
 
 interface IButtonLoginProps {
@@ -11,9 +12,12 @@ interface IButtonLoginProps {
 
 
 export const ButtonLogin: React.FC<IButtonLoginProps> = ({ type, onClick, children}) => {
+    
+    const { nomeDoUsuario } = useUsuarioLogado();
+    
     return (
         <button type={type} onClick={onClick}>
-            {children}
+          {nomeDoUsuario}  {children}
         </button>
     )
 }
