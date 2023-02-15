@@ -1,6 +1,6 @@
 import { Api } from "../ApiConfig";
 import { ApiException } from "../ErrorException";
-interface ITarefa {
+export interface ITarefa {
   id: number;
   title: string;
   isCompleted: boolean;
@@ -53,7 +53,7 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
   const deleteById  = async (id: string): Promise<undefined | ApiException> => {
 
     try {
-      const { data } = await Api().get(`./tarefas/${id}`);
+      await Api().get(`./tarefas/${id}`);
       return undefined;
     } catch ( error: any ) {
       return new ApiException(error.message || 'Erro ao apagar o registro.');
