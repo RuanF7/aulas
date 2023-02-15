@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ApiException } from '../../shared/services/api/ErrorException';
 import { ITarefa, TarefasService } from '../../shared/services/api/tarefas/TarefasService';
+import './Dashboard.css';
 
 export const Dashboard = () => {
     const [lista, setLista] = useState<ITarefa[]>([]);
