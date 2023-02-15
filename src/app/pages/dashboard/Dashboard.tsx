@@ -37,27 +37,41 @@ export const Dashboard = () => {
         }
     }, [lista]);
 
-    const handleToggleComplete = useCallback ((id: number) => {
+    const handleToggleComplete = useCallback((id: number) => {
         const tarefaToUpdate = lista.find((tarefa) => tarefa.id === id);
-        if (!tarefaToUpdate) return; 
-              
+        if (!tarefaToUpdate) return;
+
         TarefasService.updateById(id, {
             ...tarefaToUpdate,
             isCompleted: !tarefaToUpdate.isCompleted,
         })
-        .then((result) => {
-            if (result instanceof ApiException) {
-                alert(result.message);
-            } else {
-                setLista(oldLista => {
-                    return oldLista.map(oldListItem => {
-                        if (oldListItem.id === id) return result;
-                        return oldListItem;                 
+            .then((result) => {
+                if (result instanceof ApiException) {
+                    alert(result.message);
+                } else {
+                    setLista(oldLista => {
+                        return oldLista.map(oldListItem => {
+                            if (oldListItem.id === id) return result;
+                            return oldListItem;
+                        });
                     });
-                });                
-            }
-        });     
+                }
+            });
     }, [lista]);
+
+    const handleDelete = useCallback((id: number) => {
+        TarefasService.deleteById(id)
+            .then((result) => {
+                if (result instanceof ApiException) {
+                    alert(result.message);
+                } else {
+                    setLista(oldLista => {
+                        return oldLista.filter(oldListItem => oldListItem.id !== id);
+                    });
+                }
+            });
+    }, []);
+
 
     return (
         <div>
@@ -67,7 +81,7 @@ export const Dashboard = () => {
                 onKeyDown={handleInputKeyDown} />
 
             <p>{lista.filter((listItem) => listItem.isCompleted).length}</p>
-            
+
             <ul>
                 {lista.map((listItem) => {
                     return <li key={listItem.id}>
@@ -77,6 +91,8 @@ export const Dashboard = () => {
                             onChange={() => handleToggleComplete(listItem.id)}
                         />
                         {listItem.title}
+
+                        <button onClick={() => handleDelete(listItem.id)}>Apagar</button>
                     </li>;
                 })}
             </ul>

@@ -50,7 +50,7 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
   const deleteById  = async (id: number): Promise<undefined | ApiException> => {
 
     try {
-      await Api().get(`./tarefas/${id}`);
+      await Api().delete(`./tarefas/${id}`);
       return undefined;
     } catch ( error: any ) {
       return new ApiException(error.message || 'Erro ao apagar o registro.');
