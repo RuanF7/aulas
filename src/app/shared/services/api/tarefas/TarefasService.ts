@@ -15,9 +15,8 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
     return new ApiException(error.message || 'Erro ao buscar os registros.');
 
    }
-  };
-  const getById  = async (id: number): Promise<ITarefa | ApiException> => {
-
+    };
+  const getById = async (id: number): Promise<ITarefa | ApiException> => {
     try {
       const { data } = await Api().get(`./tarefas/${id}`);
       return data;
@@ -28,8 +27,7 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
     };
   
 
-  const create  = async (dataToCreate: Omit<ITarefa, 'id'>): Promise<ITarefa[] | ApiException> => {
-
+  const create  = async (dataToCreate: Omit<ITarefa, 'id'>): Promise<ITarefa | ApiException> => {
     try {
       const { data } = await Api().post<any>('./tarefas', dataToCreate);
       return data;
@@ -39,8 +37,7 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
      }
     };
 
-  const updateById  = async (id: string, dataToUpdate: ITarefa): Promise<ITarefa[] | ApiException> => {
-
+  const updateById  = async (id: number, dataToUpdate: ITarefa): Promise<ITarefa | ApiException> => {
     try {
       const { data } = await Api().put(`./tarefas/${id}`, dataToUpdate);
       return data;
@@ -50,7 +47,7 @@ const getAll = async (): Promise<ITarefa[] | ApiException> => {
      }
     };
 
-  const deleteById  = async (id: string): Promise<undefined | ApiException> => {
+  const deleteById  = async (id: number): Promise<undefined | ApiException> => {
 
     try {
       await Api().get(`./tarefas/${id}`);
